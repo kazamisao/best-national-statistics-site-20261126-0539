@@ -1,0 +1,278 @@
+/* Tanah & Tetangga — an atlas in sand, plum, terracotta and blue. */
+:root {
+  --paper: #f6edd8;
+  --sand: #eedfc5;
+  --card: #fff9ee;
+  --ink: #422d40;
+  --ink-soft: #6b5568;
+  --terra: #bc563d;
+  --terra-deep: #9c3f2a;
+  --blue: #347d91;
+  --line: #d9c49a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  font-size: 17px;
+  line-height: 1.55;
+}
+h1, h2, h3, h4 { line-height: 1.15; margin: 0 0 0.5em; }
+a { color: var(--terra-deep); }
+
+/* Masthead */
+.masthead {
+  background: var(--ink);
+  color: #f6edd8;
+  padding: 1.3rem 1.2rem 0;
+  text-align: center;
+}
+.kicker {
+  margin: 0 0 0.6rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #d9c49a;
+}
+.masthead h1 {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  margin: 0 0 0.4rem;
+  letter-spacing: 0.01em;
+}
+.standfirst {
+  max-width: 640px;
+  margin: 0 auto 1rem;
+  font-size: 1.02rem;
+  color: #efe3c8;
+}
+.mainnav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.2rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-bottom: 0.6rem;
+}
+.mainnav a {
+  color: #f6edd8;
+  text-decoration: none;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  border: 1px solid transparent;
+}
+.mainnav a:hover { border-color: #d9c49a; }
+.mainnav a.active { background: var(--terra); color: #fff7ea; }
+
+/* Pages */
+main { max-width: 1080px; margin: 0 auto; padding: 1.5rem 1.2rem 2rem; }
+.page.hidden { display: none; }
+section h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); margin: 0.4rem 0 0.8rem; }
+.secno {
+  color: var(--terra);
+  font-size: 0.85em;
+  margin-right: 0.4rem;
+}
+.lede { font-size: 1.12rem; max-width: 720px; }
+.note, .source, .map-note {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.source { border-top: 1px solid var(--line); padding-top: 0.6rem; }
+
+/* Stat cards */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+.stat {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--terra);
+  padding: 0.6rem 0.7rem;
+}
+.stat-num {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--ink);
+}
+.stat-label { font-size: 0.82rem; color: var(--ink-soft); }
+
+/* Map toggles */
+.map-toggle { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1.2rem 0 0.8rem; }
+.toggle-btn {
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.toggle-btn.active { background: var(--ink); color: #f6edd8; }
+.toggle-hint { font-size: 0.9rem; color: var(--ink-soft); }
+
+/* Maps */
+.maps { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.map-panel {
+  margin: 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 0.9rem;
+}
+.map-panel.featured { border: 2px solid var(--terra); }
+.map-panel .lead-tag {
+  display: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terra-deep);
+  font-weight: bold;
+}
+.map-panel.featured .lead-tag { display: block; }
+.map-panel figcaption { font-size: 0.95rem; margin-bottom: 0.6rem; }
+.map svg { width: 100%; height: auto; display: block; }
+.map-name {
+  font-size: 13px;
+  font-weight: bold;
+  text-anchor: middle;
+  font-family: Georgia, serif;
+}
+.map-pop { font-size: 11.5px; text-anchor: middle; font-family: Georgia, serif; }
+.region { cursor: pointer; outline: none; }
+.region polygon, .region circle { transition: opacity 0.15s; }
+.region:hover polygon, .region:hover circle { opacity: 0.75; }
+.region.selected polygon, .region.selected circle {
+  stroke: var(--ink);
+  stroke-width: 3.5;
+}
+.legend { display: flex; flex-wrap: wrap; gap: 0.7rem; font-size: 0.85rem; margin-top: 0.6rem; }
+.legend i {
+  display: inline-block;
+  width: 14px; height: 14px;
+  border: 1px solid var(--line);
+  vertical-align: -2px;
+  margin-right: 0.25rem;
+}
+
+/* Selected region card */
+.selected-card {
+  margin: 1rem 0;
+  background: var(--ink);
+  color: #f6edd8;
+  padding: 1rem 1.2rem;
+  border-left: 6px solid var(--terra);
+}
+.selected-card h3 { margin: 0 0 0.2rem; font-size: 1.4rem; }
+.selected-card h3 a { color: #f6edd8; }
+.selected-card .sel-sub { color: #d9c49a; margin: 0 0 0.7rem; }
+.sel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem 1rem; }
+.sel-grid div b { display: block; font-size: 1.15rem; color: #fff; }
+.sel-grid div span { font-size: 0.85rem; color: #d9c49a; }
+
+/* Bars */
+.bars { margin: 1rem 0; }
+.hbar {
+  display: grid;
+  grid-template-columns: 170px 1fr 92px;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.32rem 0;
+  text-decoration: none;
+  color: inherit;
+}
+.hbar-track {
+  height: 18px;
+  background: #e7d8b8;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.hbar-fill { display: block; height: 100%; background: var(--terra); }
+.hbar-fill.accent { background: var(--blue); }
+.hbar-value { text-align: right; font-weight: bold; font-variant-numeric: tabular-nums; }
+.hbar-label { font-size: 0.95rem; }
+a.hbar:hover .hbar-label { text-decoration: underline; }
+.pair { margin-bottom: 1rem; }
+.pair h4 { margin: 0 0 0.3rem; font-size: 1.05rem; }
+.ranking { margin: 0.5rem 0 1rem; }
+
+/* Profile + compare */
+.picker-label { display: block; font-weight: bold; margin-bottom: 0.3rem; }
+.picker {
+  font: inherit;
+  padding: 0.5rem 0.7rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  background: var(--card);
+  color: var(--ink);
+  max-width: 100%;
+}
+.profile {
+  margin-top: 1rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--terra);
+  padding: 1.1rem 1.2rem;
+}
+.profile h3 { font-size: 1.5rem; margin-bottom: 0.1rem; }
+.profile .prof-sub { color: var(--ink-soft); margin: 0 0 0.9rem; }
+.prof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem 1rem; }
+.prof-grid div b { display: block; font-size: 1.25rem; }
+.prof-grid div span { font-size: 0.88rem; color: var(--ink-soft); }
+.compare-pickers { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
+.compare-pickers label { font-weight: bold; }
+.compare-pickers .picker { display: block; margin-top: 0.3rem; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; background: var(--card); font-size: 0.95rem; }
+th, td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); text-align: right; font-variant-numeric: tabular-nums; }
+th:first-child, td:first-child { text-align: left; }
+th { background: var(--ink); color: #f6edd8; cursor: pointer; white-space: nowrap; }
+th:hover { background: var(--terra-deep); }
+td a { color: var(--terra-deep); }
+tr.winner td { font-weight: bold; }
+td.diff-pos { color: var(--terra-deep); font-weight: bold; }
+td.diff-neg { color: var(--blue); font-weight: bold; }
+
+/* Methods + sources */
+.methods, .sources { max-width: 760px; }
+.methods li, .sources li { margin-bottom: 0.5rem; }
+
+footer {
+  background: var(--ink);
+  color: #d9c49a;
+  padding: 1.4rem 1.2rem;
+  text-align: center;
+  font-size: 0.92rem;
+}
+footer p { max-width: 720px; margin: 0 auto; }
+footer strong { color: #f6edd8; }
+
+/* Phone */
+@media (max-width: 1000px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+  .stat-num { font-size: 1.5rem; }
+}
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .maps { grid-template-columns: 1fr; }
+  .maps[data-lead="geo"] #panel-carto { display: none; }
+  .maps[data-lead="carto"] #panel-geo { display: none; }
+  .sel-grid, .prof-grid { grid-template-columns: 1fr 1fr; }
+  .hbar { grid-template-columns: 110px 1fr 78px; gap: 0.5rem; }
+  .map-name { font-size: 15px; }
+  .map-pop { font-size: 13px; }
+}
+@media (max-width: 420px) {
+  .stats { grid-template-columns: 1fr; }
+  .sel-grid, .prof-grid { grid-template-columns: 1fr; }
+}

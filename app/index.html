@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tanah &amp; Tetangga — Namibia in Numbers</title>
+<meta name="description" content="Namibia in numbers from the 2023 census: two maps, fourteen regions, and the question of wide land against the people who live on it.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="masthead">
+  <p class="kicker">Namibia · 2023 Population and Housing Census · Namibia Statistics Agency</p>
+  <h1>Tanah &amp; Tetangga</h1>
+  <p class="standfirst">Namibia in numbers — an atlas of two maps. One map shows the land;
+  the other shows the people. The country is vast and nearly empty in the south,
+  crowded in a thin northern strip — and every service, school and job has to
+  cross that distance.</p>
+  <nav class="mainnav" aria-label="Sections">
+    <a href="#/" data-nav="sebaran">Sebaran</a>
+    <a href="#/umur" data-nav="umur">Umur &amp; Rumah Tangga</a>
+    <a href="#/pendidikan" data-nav="pendidikan">Pendidikan</a>
+    <a href="#/air" data-nav="air">Air &amp; Perumahan</a>
+    <a href="#/kerja" data-nav="kerja">Kerja &amp; Ekonomi</a>
+    <a href="#/wilayah" data-nav="wilayah">Profil Wilayah</a>
+    <a href="#/banding" data-nav="banding">Banding</a>
+    <a href="#/tabel" data-nav="tabel">Tabel &amp; Metode</a>
+  </nav>
+</header>
+
+<main>
+<!-- ============ 01 · SEBARAN ============ -->
+<section class="page" id="page-sebaran">
+  <h2><span class="secno">01</span> Sebaran — land against people</h2>
+  <div class="stats">
+    <div class="stat"><span class="stat-num">3,022,401</span><span class="stat-label">people counted, 24 September 2023</span></div>
+    <div class="stat"><span class="stat-num">825,615 km²</span><span class="stat-label">land area — 3.7 people per km²</span></div>
+    <div class="stat"><span class="stat-num">50.0%</span><span class="stat-label">live in towns and cities — the first census where half do</span></div>
+    <div class="stat"><span class="stat-num">756,339</span><span class="stat-label">private households, averaging 3.8 people</span></div>
+    <div class="stat"><span class="stat-num">+43.0%</span><span class="stat-label">population growth since the 2011 census</span></div>
+    <div class="stat"><span class="stat-num">14</span><span class="stat-label">regions, from Khomas (494,605) to Omaheke (102,881)</span></div>
+  </div>
+
+  <div class="map-toggle" role="group" aria-label="Choose the leading map">
+    <button id="btn-geo" class="toggle-btn active" type="button" aria-pressed="true">Peta wilayah</button>
+    <button id="btn-carto" class="toggle-btn" type="button" aria-pressed="false">Kartogram penduduk</button>
+    <span class="toggle-hint">Both maps stay side by side here; the toggle picks which one leads.
+    On a phone it picks which map shows. Tap a region on either map.</span>
+  </div>
+
+  <div class="maps" id="maps" data-lead="geo">
+    <figure class="map-panel featured" id="panel-geo">
+      <span class="lead-tag">Leading map</span>
+      <figcaption><strong>Peta wilayah.</strong> Regions coloured by how many people
+      live on each square kilometre — pale where the land is empty, deep terracotta
+      where it crowds. Shapes are simplified; the geography is real.</figcaption>
+      <div id="map-geo" class="map"></div>
+      <div class="legend" aria-label="Density legend">
+        <span><i style="background:#EFDDBE"></i>under 1 /km²</span>
+        <span><i style="background:#E3C79B"></i>1–3</span>
+        <span><i style="background:#D89A6A"></i>3–8</span>
+        <span><i style="background:#C96F45"></i>8–15</span>
+        <span><i style="background:#BC563D"></i>over 15</span>
+      </div>
+    </figure>
+    <figure class="map-panel" id="panel-carto">
+      <span class="lead-tag">Leading map</span>
+      <figcaption><strong>Kartogram penduduk.</strong> One circle per region, sized by
+      population and placed where the region sits. Khomas, the capital region, swells;
+      //Kharas, the largest region by land, shrinks to a dot.</figcaption>
+      <div id="map-carto" class="map"></div>
+      <p class="map-note">Circle area is proportional to population. The five largest
+      circles hold 54.5% of the country.</p>
+    </figure>
+  </div>
+
+  <div id="selected-card" class="selected-card" aria-live="polite"></div>
+
+  <h3>Fourteen regions, ranked</h3>
+  <div class="map-toggle" role="group" aria-label="Show counts or shares">
+    <button id="btn-abs" class="toggle-btn active" type="button" aria-pressed="true">Jumlah orang</button>
+    <button id="btn-pct" class="toggle-btn" type="button" aria-pressed="false">Persen dari negara</button>
+  </div>
+  <div id="ranking" class="ranking"></div>
+  <p class="note">The five most populous regions — Khomas, Ohangwena, Omusati, Oshikoto and
+  Erongo — hold 1,646,513 people, 54.5% of Namibia. The five largest by land,
+  //Kharas, Hardap, Kunene, Omaheke and Otjozondjupa, cover most of the map and
+  hold just over a fifth of its people.</p>
+</section>
+
+<!-- ============ 02 · UMUR ============ -->
+<section class="page hidden" id="page-umur">
+  <h2><span class="secno">02</span> Umur &amp; Rumah Tangga — a young country, smaller homes</h2>
+  <p class="lede">Namibia is young: seven in ten people are under 35, and more than a third
+  are children. At the same time households are shrinking — 3.8 people on average,
+  down from 4.4 in 2011 — while their number grew by almost two-thirds.</p>
+  <div id="age-bars" class="bars"></div>
+  <div class="stats">
+    <div class="stat"><span class="stat-num">71.1%</span><span class="stat-label">of the population is under 35</span></div>
+    <div class="stat"><span class="stat-num">42.7%</span><span class="stat-label">are children and teenagers, 0–17 (about 1.29 million)</span></div>
+    <div class="stat"><span class="stat-num">21</span><span class="stat-label">median age in years</span></div>
+    <div class="stat"><span class="stat-num">51.2%</span><span class="stat-label">women (1,548,177) to 48.8% men (1,474,224)</span></div>
+    <div class="stat"><span class="stat-num">49%</span><span class="stat-label">of households are headed by a woman</span></div>
+    <div class="stat"><span class="stat-num">+62.7%</span><span class="stat-label">households since 2011 — they grew faster than the population</span></div>
+  </div>
+  <p class="note">Household size is not the same everywhere: Kavango West averages 5.7 people
+  per home and Kavango East 5.5, while Erongo averages 3.2 and //Kharas 3.3.
+  See the region profiles for every region's figure.</p>
+  <p class="source">Source: NSA, 2023 Population and Housing Census Main Report.</p>
+</section>
+
+<!-- ============ 03 · PENDIDIKAN ============ -->
+<section class="page hidden" id="page-pendidikan">
+  <h2><span class="secno">03</span> Pendidikan — the schooling gap is a rural gap</h2>
+  <p class="lede">Nine in ten Namibians aged 15 and over can read and write. But the chance
+  of never having been to school at all depends sharply on where a child grows up:
+  in towns it is one child in twenty; in the countryside, one in seven.</p>
+  <div id="edu-bars" class="bars"></div>
+  <div class="stats">
+    <div class="stat"><span class="stat-num">91.5%</span><span class="stat-label">of people aged 15 and over are literate</span></div>
+    <div class="stat"><span class="stat-num">5.2%</span><span class="stat-label">of people aged 6+ in towns never attended school</span></div>
+    <div class="stat"><span class="stat-num">14.4%</span><span class="stat-label">of people aged 6+ in rural areas never attended school</span></div>
+    <div class="stat"><span class="stat-num">2.8×</span><span class="stat-label">a rural child is that much more likely never to have been schooled</span></div>
+  </div>
+  <p class="note">The gap is the same story the maps tell: schools, like clinics and water
+  points, must serve a population spread across 825,615 km², and the sparsest
+  regions are the hardest to reach.</p>
+  <p class="source">Source: NSA, 2023 Population and Housing Census Main Report.</p>
+</section>
+
+<!-- ============ 04 · AIR ============ -->
+<section class="page hidden" id="page-air">
+  <h2><span class="secno">04</span> Air &amp; Perumahan — water reached further than toilets or power</h2>
+  <p class="lede">Safe drinking water is the quiet success of the twelve years between
+  censuses: nine in ten households have it now, up from eight in ten in 2011.
+  Toilets and electricity lag far behind — and both lag worst in the countryside.</p>
+  <div id="services-bars" class="bars"></div>
+  <div class="stats">
+    <div class="stat"><span class="stat-num">91.4%</span><span class="stat-label">of households have safe drinking water (80% in 2011)</span></div>
+    <div class="stat"><span class="stat-num">40.0%</span><span class="stat-label">of households have no toilet — 302,385 homes</span></div>
+    <div class="stat"><span class="stat-num">59.5%</span><span class="stat-label">electricity access; 306,524 homes still without power</span></div>
+    <div class="stat"><span class="stat-num">64%</span><span class="stat-label">of rural homes have no toilet, against 20% in towns</span></div>
+    <div class="stat"><span class="stat-num">78%</span><span class="stat-label">of homes in Kavango West have no toilet; over 77% in Zambezi</span></div>
+    <div class="stat"><span class="stat-num">47%</span><span class="stat-label">of homes use mains electricity for lighting</span></div>
+  </div>
+  <p class="note">Homes without power: 212,519 in rural areas and 94,005 in towns. The
+  national energy compact counts the same census households.</p>
+  <p class="source">Source: NSA, 2023 Population and Housing Census Main Report; Namibia National Energy Compact.</p>
+</section>
+
+<!-- ============ 05 · KERJA ============ -->
+<section class="page hidden" id="page-kerja">
+  <h2><span class="secno">05</span> Kerja &amp; Ekonomi — a small economy, a wide jobs gap</h2>
+  <p class="lede">More than one in three Namibians of working age who want work cannot find
+  it — and counting everyone who has stopped looking, more than half are out of
+  work. The economy that must absorb them is worth US$12.35 billion, built on
+  mining, services and tourism.</p>
+  <div id="labour-bars" class="bars"></div>
+  <div class="stats">
+    <div class="stat"><span class="stat-num">36.9%</span><span class="stat-label">unemployed, strict definition (actively looking), 2023</span></div>
+    <div class="stat"><span class="stat-num">54.8%</span><span class="stat-label">unemployed on the broad measure, including discouraged workers</span></div>
+    <div class="stat"><span class="stat-num">44.4%</span><span class="stat-label">youth unemployment — the sharpest edge of the jobs gap</span></div>
+    <div class="stat"><span class="stat-num">39.6%</span><span class="stat-label">of women unemployed, against 34.6% of men</span></div>
+    <div class="stat"><span class="stat-num">320,442</span><span class="stat-label">people unemployed on the strict count</span></div>
+    <div class="stat"><span class="stat-num">US$4,168</span><span class="stat-label">GDP per person, 2023 (World Bank)</span></div>
+  </div>
+  <h3>What the economy is made of</h3>
+  <div id="sector-bars" class="bars"></div>
+  <p class="note">Mining was 18.0% of GDP in the third quarter of 2023; tourism contributes
+  about 14.5% of GDP. Services dominate at 63.5%, farming, fishing and mining
+  together at 20.6%, manufacturing and building at 15.9% (2024 shares).</p>
+  <p class="source">Source: NSA, 2023 PHC Labour Force Report; World Bank World Development Indicators.</p>
+</section>
+
+<!-- ============ 06 · PROFIL WILAYAH ============ -->
+<section class="page hidden" id="page-wilayah">
+  <h2><span class="secno">06</span> Profil Wilayah — every region, in full</h2>
+  <p class="lede">Pick a region — on the map, in the ranking, or here — and read its whole
+  census record: how many people, how fast it grew, how big its households are,
+  and how much empty land each person has around them.</p>
+  <label class="picker-label" for="region-select">Wilayah</label>
+  <select id="region-select" class="picker"></select>
+  <div id="profile" class="profile"></div>
+</section>
+
+<!-- ============ 07 · BANDING ============ -->
+<section class="page hidden" id="page-banding">
+  <h2><span class="secno">07</span> Banding — two regions, side by side</h2>
+  <p class="lede">The atlas question, answered for any pair: how does a crowded northern
+  region compare with a vast southern one? Choose two regions and read the
+  difference, indicator by indicator.</p>
+  <div class="compare-pickers">
+    <label>Wilayah pertama <select id="cmp-a" class="picker"></select></label>
+    <label>Wilayah kedua <select id="cmp-b" class="picker"></select></label>
+  </div>
+  <div id="compare-table"></div>
+  <p class="note">Try Khomas against //Kharas: the capital region holds 4.5 times as many
+  people on less than a quarter of the land — 13.4 people per km² against 0.7.</p>
+</section>
+
+<!-- ============ 08 · TABEL ============ -->
+<section class="page hidden" id="page-tabel">
+  <h2><span class="secno">08</span> Tabel &amp; Metode — all fourteen regions, and how to read them</h2>
+  <p class="lede">Every number on this site, in one table. Click a column heading to sort.
+  Figures are the final census counts; shares, household sizes and densities are
+  computed from them and agree to one decimal.</p>
+  <div id="full-table" class="table-wrap"></div>
+  <h3>Metode</h3>
+  <ul class="methods">
+    <li><strong>Count.</strong> The census counted everyone present in Namibia on the
+    reference night of 24 September 2023: 3,022,401 people in 756,339 private
+    households. It was the country's fourth post-independence census and its
+    first fully digital count.</li>
+    <li><strong>Maps.</strong> The geographic map is schematic — region shapes are
+    simplified, but each region sits where it sits. The cartogram keeps the same
+    geography and sizes each circle by population, so area means people.</li>
+    <li><strong>Unemployment.</strong> The strict rate counts people actively looking
+    for work (36.9%); the broad rate adds those who have stopped looking
+    (54.8%). Both come from the census labour-force module.</li>
+    <li><strong>Areas.</strong> Regional areas follow the published administrative
+    areas; the national total (825,615 km²) is the country's published figure,
+    so the fourteen areas do not sum to it exactly.</li>
+    <li><strong>Schooling.</strong> "Never attended school" covers people aged 6 and
+    over. Literacy covers people aged 15 and over.</li>
+  </ul>
+  <h3>Sumber</h3>
+  <ul class="sources" id="sources"></ul>
+  <p class="source">Built as an independent atlas from the public census releases. Not affiliated
+  with the Namibia Statistics Agency.</p>
+</section>
+</main>
+
+<footer>
+  <p><strong>Tanah &amp; Tetangga</strong> — Namibia in numbers. Data: NSA 2023 census.
+  Maps are schematic; figures are the published counts. Made for the make.fun
+  best national statistics site bounty.</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
