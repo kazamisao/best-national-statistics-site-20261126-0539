@@ -108,6 +108,15 @@ const server = createServer((req, res) => {
       await page.setViewport({ width: shot.viewport.width, height: shot.viewport.height });
       await page.goto(base + shot.path, { waitUntil: 'networkidle0', timeout: 30000 });
       await sleep(500);
+      if (shot.file === '1-sebaran.jpg') {
+        // Frame the two maps, not the masthead: the cover shot must show
+        // both maps whole, so scroll the maps block to the top first.
+        await page.evaluate(() => {
+          document.getElementById('maps').scrollIntoView();
+          window.scrollBy(0, -12);
+        });
+        await sleep(400);
+      }
       if (shot.file === '4-kartogram-phone.jpg') {
         await page.evaluate(() => {
           document.getElementById('btn-carto').click();

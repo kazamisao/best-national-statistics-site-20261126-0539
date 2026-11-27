@@ -76,8 +76,8 @@ export function renderGeoMap(selectedSlug) {
     const [lx, ly] = g.label;
     return `<g class="region${sel ? ' selected' : ''}" data-region="${r.slug}" tabindex="0" role="button" aria-label="${esc(r.name)}: ${fmt(r.population)} people">
       <polygon points="${pts}" fill="${densityColor(r.density)}" stroke="#F6EDD8" stroke-width="2"/>
-      <text x="${lx}" y="${ly - 2}" class="map-name" fill="${labelColor(r.density)}">${esc(r.name)}</text>
-      <text x="${lx}" y="${ly + 14}" class="map-pop" fill="${labelColor(r.density)}">${fmt(r.population)}</text>
+      <text x="${lx}" y="${ly - 3}" class="map-name" fill="${labelColor(r.density)}">${esc(r.name)}</text>
+      <text x="${lx}" y="${ly + 17}" class="map-pop" fill="${labelColor(r.density)}">${fmt(r.population)}</text>
     </g>`;
   }).join('');
   return `<svg viewBox="0 0 1000 720" role="img" aria-label="Schematic map of Namibia coloured by population density">
@@ -90,18 +90,18 @@ export function renderCartoMap(selectedSlug) {
   const circles = REGIONS.map((r) => {
     const c = CARTO[r.slug];
     const sel = r.slug === selectedSlug;
-    const inside = c.r >= 38;
+    const inside = c.r >= 38 && r.name.length <= 10;
     const name = inside
-      ? `<text x="${c.x}" y="${c.y - 2}" class="map-name" fill="#FFF7EA">${esc(r.name)}</text>
-         <text x="${c.x}" y="${c.y + 14}" class="map-pop" fill="#FFF7EA">${fmt(r.population)}</text>`
-      : `<text x="${c.x}" y="${c.y + c.r + 16}" class="map-name" fill="#422D40">${esc(r.name)}</text>
-         <text x="${c.x}" y="${c.y + c.r + 30}" class="map-pop" fill="#422D40">${fmt(r.population)}</text>`;
+      ? `<text x="${c.x}" y="${c.y - 3}" class="map-name" fill="#FFF7EA">${esc(r.name)}</text>
+         <text x="${c.x}" y="${c.y + 17}" class="map-pop" fill="#FFF7EA">${fmt(r.population)}</text>`
+      : `<text x="${c.x}" y="${c.y + c.r + 21}" class="map-name" fill="#422D40">${esc(r.name)}</text>
+         <text x="${c.x}" y="${c.y + c.r + 39}" class="map-pop" fill="#422D40">${fmt(r.population)}</text>`;
     return `<g class="region${sel ? ' selected' : ''}" data-region="${r.slug}" tabindex="0" role="button" aria-label="${esc(r.name)}: ${fmt(r.population)} people">
       <circle cx="${c.x}" cy="${c.y}" r="${c.r}" fill="#BC563D" fill-opacity="0.92" stroke="#F6EDD8" stroke-width="2"/>
       ${name}
     </g>`;
   }).join('');
-  return `<svg viewBox="0 0 1000 720" role="img" aria-label="Cartogram of Namibia: one circle per region, sized by population">
+  return `<svg viewBox="40 20 980 680" role="img" aria-label="Cartogram of Namibia: one circle per region, sized by population">
     ${circles}
   </svg>`;
 }

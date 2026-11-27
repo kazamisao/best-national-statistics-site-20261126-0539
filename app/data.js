@@ -58,7 +58,7 @@ export const AGE_BANDS = [
 export const EDUCATION = {
   neverSchooledUrbanPct: 5.2,
   neverSchooledRuralPct: 14.4,
-  literacy15PlusPct: 91.5,
+  literacy15PlusPct: 87.3,
   note: 'Share of people aged 6 and over who never attended school.',
 };
 
@@ -90,6 +90,7 @@ export const ECONOMY = {
   gdpUsdBn: 12.35,
   gdpPerCapitaUsd: 4168,
   gdpYear: 2023,
+  sectorsYear: 2024,
   sectors: [
     { label: 'Tertiary (services)', pct: 63.5 },
     { label: 'Primary (farming, fishing, mining)', pct: 20.6 },
@@ -104,5 +105,6 @@ export const SOURCES = [
   'Namibia Statistics Agency, 2023 Population and Housing Census Labour Force Report, released 29 January 2025',
   'Namibia Statistics Agency, regional profiles from the 2023 census (nsa.org.na/regions)',
   'World Bank, World Development Indicators — Namibia GDP 2023',
+  'World Travel and Tourism Council, Economic Impact Research 2023 — Namibia (tourism total contribution estimate)',
   'Namibia National Energy Compact (Mission 300), electricity access 2023, from census household counts',
 ];
